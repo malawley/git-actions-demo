@@ -77,3 +77,4 @@ except Exception as e:
 # re-trigger after Artifact Registry switch
 # trigger for Artifact Registry
 # next trigger for Artifact Registry
+# trigger after fixing artifact registry permissions
