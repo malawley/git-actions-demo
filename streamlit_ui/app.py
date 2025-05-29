@@ -11,7 +11,7 @@ RAW_BUCKET = os.environ.get("RAW_BUCKET", "raw-inspection-data-434")
 PREFIX = "git-action-demo"
 
 st.set_page_config(page_title="Extractor UI", layout="centered")
-st.title("GitHub Actions + Cloud Run: Extractor UI")
+st.title("Demo: GitHub Actions + Cloud Run: Extractor UI")
 
 # === Health Check ===
 st.header("🔍 Extractor Health Check")
