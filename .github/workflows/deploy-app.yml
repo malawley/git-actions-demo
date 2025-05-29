@@ -2,10 +2,10 @@ name: Deploy Streamlit UI to Cloud Run
 
 on:
   push:
-    paths:
-      - 'streamlit_ui/**'
     branches:
       - main
+    paths:
+      - 'streamlit_ui/**'
   workflow_dispatch:
 
 jobs:
