@@ -1,0 +1,39 @@
+name: Deploy Streamlit UI to Cloud Run
+
+on:
+  push:
+    paths:
+      - 'streamlit_ui/**'
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      - name: Build and push Docker image to GCR
+        run: |
+          IMAGE=gcr.io/${{ secrets.PROJECT_ID }}/streamlit-ui-demo
+          docker build -t $IMAGE ./streamlit_ui
+          docker push $IMAGE
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy streamlit-ui-demo \
+            --image gcr.io/${{ secrets.PROJECT_ID }}/streamlit-ui-demo \
+            --region ${{ secrets.REGION }} \
+            --platform managed \
+            --allow-unauthenticated \
+            --set-env-vars EXTRACTOR_URL=${{ secrets.EXTRACTOR_URL }},RAW_BUCKET=${{ secrets.RAW_BUCKET }}
