@@ -78,3 +78,4 @@ except Exception as e:
 # trigger for Artifact Registry
 # next trigger for Artifact Registry
 # trigger after fixing artifact registry permissions
+# trigger for working deploy
