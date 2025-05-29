@@ -24,16 +24,16 @@ jobs:
       - name: Set up Google Cloud CLI
         uses: google-github-actions/setup-gcloud@v1
 
-      - name: Build and push Docker image to GCR
+      - name: Build and push Docker image to Artifact Registry
         run: |
-          IMAGE=gcr.io/${{ secrets.PROJECT_ID }}/streamlit-ui-demo
+          IMAGE=us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/cloud-run-repo/streamlit-ui-demo
           docker build -t $IMAGE ./streamlit_ui
           docker push $IMAGE
 
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy streamlit-ui-demo \
-            --image gcr.io/${{ secrets.PROJECT_ID }}/streamlit-ui-demo \
+            --image us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/cloud-run-repo/streamlit-ui-demo \
             --region ${{ secrets.REGION }} \
             --platform managed \
             --allow-unauthenticated \
