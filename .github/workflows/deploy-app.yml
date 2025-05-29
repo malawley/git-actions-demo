@@ -37,3 +37,4 @@ jobs:
             --platform managed \
             --allow-unauthenticated \
             --set-env-vars EXTRACTOR_URL=${{ secrets.EXTRACTOR_URL }},RAW_BUCKET=${{ secrets.RAW_BUCKET }}
+# Trigger redeploy
