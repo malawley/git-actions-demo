@@ -24,6 +24,10 @@ jobs:
       - name: Set up Google Cloud CLI
         uses: google-github-actions/setup-gcloud@v1
 
+      - name: Configure Docker for Artifact Registry
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
       - name: Build and push Docker image to Artifact Registry
         run: |
           IMAGE=us-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/cloud-run-repo/streamlit-ui-demo
