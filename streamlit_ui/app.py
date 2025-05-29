@@ -75,3 +75,4 @@ except Exception as e:
 # re-trigger after secret fix
 # re-run with fixed service account key
 # re-trigger after Artifact Registry switch
+# trigger for Artifact Registry
